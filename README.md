@@ -33,6 +33,3 @@ npm start
 - Autenticación mediante JWT almacenado en cookies HTTP-only
 - Validación de datos con Zod
 - CORS configurado para permitir solo el frontend autorizado
-
-## comandos 
-npm install 
