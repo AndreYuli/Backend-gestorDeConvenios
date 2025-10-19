@@ -1,6 +1,6 @@
 # Backend - Gestor de Convenios
 
-Backend para la gestión de convenios universitarios desarrollado con Node.js, Express y MongoDB.
+Backend para la gestión de convenios universitarios desarrollado con Node.js, Express y Postgres.
 
 ## 🛠️ Tecnologías Utilizadas
 
