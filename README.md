@@ -15,9 +15,11 @@ Backend para la gestión de convenios universitarios desarrollado con Node.js, E
 - **CORS** - Control de acceso de origen cruzado
 - **dotenv** - Variables de entorno
 
-## 📝 Scripts Disponibles
-
+## comandos 
 ```bash
+#instalar
+npm install
+
 # Modo desarrollo (con nodemon)
 npm run dev
 
@@ -33,4 +35,4 @@ npm start
 - CORS configurado para permitir solo el frontend autorizado
 
 ## comandos 
-npm install - instala las dependencias del proyecto
+npm install 
