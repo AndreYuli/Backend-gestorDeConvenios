@@ -1,4 +1,4 @@
-# Backend - Gestor de Convenios
+# Backend - Sistema de Gestión de Convenios UNAC
 
 Backend para la gestión de convenios universitarios desarrollado con Node.js, Express y Postgres.
 

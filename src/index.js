@@ -1,7 +1,16 @@
-// Punto de Entrada del Servidor UNAC
-// - Carga de variables de entorno con dotenv
-// - Conexión a base de datos MongoDB
-// - Inicialización del servidor Express
-// - Configuración del puerto desde env o 4000 por defecto
-// - Logs de inicio del servidor
-// - Manejo de señales de cierre del proceso
+import app from "./app.js";
+import { PORT } from "./config.js";
+import { connectDB } from "./db.js";
+
+async function main() {
+  try {
+    await connectDB();
+    app.listen(PORT);
+    console.log(`Listening on port http://localhost:${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV}`)
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+main();
