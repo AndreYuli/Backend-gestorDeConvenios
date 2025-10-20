@@ -48,7 +48,7 @@ export const login = async (req, res) => {
     const userType = isAdmin ? 'administrador' : 'estudiante';
     
     // Determinar URL de redirección basada en el rol
-    const redirectUrl = isAdmin ? '/admin/dashboard' : '/menuprincipal';
+    const redirectUrl = isAdmin ? '/menuPrincipalAdmin' : '/menuprincipal';
 
     // Crear token de acceso
     const token = await createAccessToken({
@@ -131,7 +131,7 @@ export const verifyToken = async (req, res) => {
       // Determinar tipo de usuario basado en rol_id
       const isAdmin = userFound.rol_id === 2;
       const userType = isAdmin ? 'administrador' : 'estudiante';
-      const redirectUrl = isAdmin ? '/admin/dashboard' : '/menuprincipal';
+      const redirectUrl = isAdmin ? '/menuPrincipalAdmin' : '/menuprincipal';
 
       return res.json({
         isAuthenticated: true,
