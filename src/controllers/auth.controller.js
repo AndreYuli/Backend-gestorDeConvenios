@@ -46,6 +46,9 @@ export const login = async (req, res) => {
     // Determinar tipo de usuario basado en rol_id
     const isAdmin = userFound.rol_id === 2; // rol_id 2 = administrador
     const userType = isAdmin ? 'administrador' : 'estudiante';
+    
+    // Determinar URL de redirección basada en el rol
+    const redirectUrl = isAdmin ? '/admin/dashboard' : '/menuprincipal';
 
     // Crear token de acceso
     const token = await createAccessToken({
@@ -55,15 +58,20 @@ export const login = async (req, res) => {
       isAdmin: isAdmin
     });
 
-    res.cookie("token", token, {
-      httpOnly: process.env.NODE_ENV !== "development",
-      secure: true,
-      sameSite: "none",
-    });
+    // Configuración de cookies según el entorno
+    const cookieOptions = {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000, // 24 horas
+    };
 
-    // Respuesta exitosa con información del usuario
+    res.cookie("token", token, cookieOptions);
+
+    // Respuesta exitosa con información del usuario y redirección
     res.json({
       success: true,
+      message: `Bienvenido ${isAdmin ? 'Administrador' : 'Estudiante'} ${userFound.nombres}`,
       user: {
         id: userFound.id,
         username: userFound.nombres || 'Usuario',
@@ -73,6 +81,10 @@ export const login = async (req, res) => {
         rol: userType,
         isAdmin: isAdmin,
         lastLogin: new Date().toISOString()
+      },
+      redirect: {
+        url: redirectUrl,
+        message: isAdmin ? 'Redirigiendo a panel de administración...' : 'Redirigiendo a menú principal...'
       }
     });
 
@@ -119,6 +131,7 @@ export const verifyToken = async (req, res) => {
       // Determinar tipo de usuario basado en rol_id
       const isAdmin = userFound.rol_id === 2;
       const userType = isAdmin ? 'administrador' : 'estudiante';
+      const redirectUrl = isAdmin ? '/admin/dashboard' : '/menuprincipal';
 
       return res.json({
         isAuthenticated: true,
@@ -130,6 +143,10 @@ export const verifyToken = async (req, res) => {
           codigoEstudiante: userFound.codigo_estudiante,
           rol: userType,
           isAdmin: isAdmin
+        },
+        redirect: {
+          url: redirectUrl,
+          shouldRedirect: true
         }
       });
     } catch (error) {

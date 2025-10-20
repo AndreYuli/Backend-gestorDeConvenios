@@ -18,6 +18,20 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 
+// Ruta de prueba
+app.get("/", (req, res) => {
+  res.json({ 
+    message: "Backend UNAC - Sistema de Gestión de Convenios", 
+    status: "funcionando",
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Health check
+app.get("/health", (req, res) => {
+  res.json({ status: "OK", service: "Backend-gestorDeConvenios" });
+});
+
 app.use("/api/auth", authRoutes);
 
 if (process.env.NODE_ENV === "production") {

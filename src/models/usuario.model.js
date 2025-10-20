@@ -8,10 +8,7 @@ export class UsuarioModel {
   static async findByEmail(email) {
     try {
       const usuario = await prisma.usuario.findUnique({
-        where: { email },
-        include: {
-          roles: true
-        }
+        where: { email }
       });
       return usuario;
     } catch (error) {
@@ -23,10 +20,7 @@ export class UsuarioModel {
   static async findByCodigoEstudiante(codigoEstudiante) {
     try {
       const usuario = await prisma.usuario.findUnique({
-        where: { codigo_estudiante: codigoEstudiante },
-        include: {
-          roles: true
-        }
+        where: { codigo_estudiante: codigoEstudiante }
       });
       return usuario;
     } catch (error) {
