@@ -4,7 +4,13 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.routes.js";
+import convenioRoutes from "./routes/convenioroutes.js";
 import { FRONTEND_URL } from "./config.js";
+
+
+
+
+
 
 const app = express();
 
@@ -33,6 +39,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/convenios", convenioRoutes);
 
 if (process.env.NODE_ENV === "production") {
   const path = await import("path");
@@ -43,5 +50,9 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve("client", "dist", "index.html"));
   });
 }
+
+
+
+
 
 export default app;
