@@ -1,11 +1,18 @@
+// 📘 Prisma schema - Backend Gestor de Convenios (UNAC)
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  // 🔗 Usa la variable DATABASE_URL del archivo .env
   url      = env("DATABASE_URL")
 }
+
+// ======================
+// 📄 MODELOS DE LA BD
+// ======================
 
 model Rol {
   id          Int       @id @default(autoincrement())
@@ -87,5 +94,3 @@ model ConvenioFacultad {
   @@unique([convenio_id, facultad_id])
   @@map("convenio_facultades")
 }
-
-

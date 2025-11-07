@@ -1,5 +1,5 @@
 // src/models/convenio.model.js
-import prisma from "../utils/db.js";
+import prisma from "../db.js";
 
 /**
  * 📘 ConvenioModel
@@ -74,7 +74,9 @@ export const ConvenioModel = {
   async findAll() {
     return await prisma.convenio.findMany({
       include: {
-        usuarios: { select: { id: true, nombres: true, apellidos: true, email: true } },
+        usuarios: {
+          select: { id: true, nombres: true, apellidos: true, email: true },
+        },
         convenio_facultades: { include: { facultades: true } },
       },
       orderBy: { created_at: "desc" },
